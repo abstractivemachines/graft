@@ -1,6 +1,6 @@
 @file:Suppress("FunctionName", "unused")
 
-package com.abstractivemachines.worktreeattach
+package com.abstractivemachines.graft
 
 import com.intellij.mcpserver.McpToolset
 import com.intellij.mcpserver.annotations.McpDescription
@@ -33,9 +33,9 @@ import kotlin.io.path.isDirectory
  * MCP tools that do what File | Open | Attach and "Remove from Project View" do in the UI,
  * so an agent can bring a git worktree into the current IDE window and take it out again.
  */
-class WorktreeAttachToolset : McpToolset {
+class GraftToolset : McpToolset {
 
-    private val log = logger<WorktreeAttachToolset>()
+    private val log = logger<GraftToolset>()
 
     override fun isExperimental(): Boolean = false
 
@@ -145,7 +145,7 @@ class WorktreeAttachToolset : McpToolset {
         }
 
         log.info("detach_worktree: detaching module $moduleName ($moduleDir) from ${project.name}")
-        writeCommandAction(project, WorktreeAttachBundle.message("command.detach")) {
+        writeCommandAction(project, GraftBundle.message("command.detach")) {
             detach(project, module)
         }
 

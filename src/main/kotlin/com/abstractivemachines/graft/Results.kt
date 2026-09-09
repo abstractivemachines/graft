@@ -1,4 +1,4 @@
-package com.abstractivemachines.worktreeattach
+package com.abstractivemachines.graft
 
 import kotlinx.serialization.Serializable
 

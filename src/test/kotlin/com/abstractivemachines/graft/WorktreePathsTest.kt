@@ -1,4 +1,4 @@
-package com.abstractivemachines.worktreeattach
+package com.abstractivemachines.graft
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

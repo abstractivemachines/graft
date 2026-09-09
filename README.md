@@ -1,6 +1,6 @@
-# Worktree Attach MCP
+# Graft
 
-[![Build](https://github.com/abstractivemachines/worktree-attach-mcp/actions/workflows/build.yml/badge.svg)](https://github.com/abstractivemachines/worktree-attach-mcp/actions/workflows/build.yml)
+[![Build](https://github.com/abstractivemachines/graft/actions/workflows/build.yml/badge.svg)](https://github.com/abstractivemachines/graft/actions/workflows/build.yml)
 
 <!-- Plugin description -->
 Lets an MCP client such as Claude Code attach a git worktree to the current JetBrains IDE window and detach it again, the two things the IDE only offers through the mouse: <b>File | Open | Attach</b> and <b>Remove from Project View</b>.
@@ -35,8 +35,8 @@ code as MCP tools.
 
 ## Install
 
-1. Download the latest `worktree-attach-mcp-<version>.zip` from
-   [Releases](https://github.com/abstractivemachines/worktree-attach-mcp/releases), or build it with
+1. Download the latest `graft-<version>.zip` from
+   [Releases](https://github.com/abstractivemachines/graft/releases), or build it with
    `./gradlew buildPlugin` (it lands in `build/distributions/`).
 2. In the IDE: **Settings | Plugins | ⚙ | Install Plugin from Disk...** and pick the zip.
 3. Restart the IDE. The tools appear under **Settings | Tools | MCP Server | Exposed Tools** as *Worktree Attach*.

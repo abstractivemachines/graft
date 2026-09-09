@@ -1,6 +1,6 @@
 import org.jetbrains.intellij.platform.gradle.extensions.intellijPlatform
 
-rootProject.name = "worktree-attach-mcp"
+rootProject.name = "graft"
 
 pluginManagement {
     plugins {

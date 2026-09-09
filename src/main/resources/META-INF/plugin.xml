@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.abstractivemachines.worktree-attach-mcp</id>
-    <name>Worktree Attach MCP</name>
+    <id>com.abstractivemachines.graft</id>
+    <name>Graft</name>
     <vendor url="https://github.com/abstractivemachines">Abstractive Machines</vendor>
 
     <!-- name, description, version, change-notes and vendor are filled in from the Gradle build (README.md and CHANGELOG.md) -->
@@ -9,9 +9,9 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.mcpServer</depends>
 
-    <resource-bundle>messages.WorktreeAttachBundle</resource-bundle>
+    <resource-bundle>messages.GraftBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <mcpServer.mcpToolset implementation="com.abstractivemachines.worktreeattach.WorktreeAttachToolset"/>
+        <mcpServer.mcpToolset implementation="com.abstractivemachines.graft.GraftToolset"/>
     </extensions>
 </idea-plugin>

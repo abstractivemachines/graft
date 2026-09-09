@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# Worktree Attach MCP Changelog
+# Graft Changelog
 
 ## [Unreleased]
 

@@ -1,4 +1,4 @@
-package com.abstractivemachines.worktreeattach
+package com.abstractivemachines.graft
 
 import java.io.IOException
 import java.nio.file.Files
