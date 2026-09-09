@@ -14,6 +14,12 @@ The plugin adds three tools to the IDE's built-in MCP Server:
 </ul>
 
 Built for the one-window-per-repo workflow: the main checkout stays open, an agent creates a worktree per ticket, attaches it, works in it, and detaches it when the branch merges.
+
+<p>
+<a href="https://github.com/abstractivemachines/graft">Source code</a> ·
+<a href="https://github.com/abstractivemachines/graft/issues">Issue tracker</a> ·
+<a href="https://github.com/abstractivemachines/graft/blob/main/CHANGELOG.md">Changelog</a>
+</p>
 <!-- Plugin description end -->
 
 ## Why
