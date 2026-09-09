@@ -1,9 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-  <rect width="40" height="40" rx="8" fill="#1F2430"/>
-  <circle cx="12" cy="10" r="3.5" fill="#F5A623"/>
-  <circle cx="12" cy="30" r="3.5" fill="#F5A623"/>
-  <circle cx="28" cy="20" r="3.5" fill="#4FD1C5"/>
-  <path d="M12 13.5v13" stroke="#F5A623" stroke-width="2.5" fill="none"/>
-  <path d="M12 20c0-4 4-4 8-4h4.5" stroke="#4FD1C5" stroke-width="2.5" fill="none"/>
-  <path d="M22.5 12.5 27 16.5l-4.5 3.5" stroke="#4FD1C5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <!-- grafted scion, base hidden inside the trunk -->
+  <path d="M14 29.5 L29 14.5" stroke="#3FC9AB" stroke-width="5" stroke-linecap="round"/>
+  <!-- rootstock trunk -->
+  <path d="M14 38V13" stroke="#B48A66" stroke-width="6" stroke-linecap="round"/>
+  <!-- rootstock crown -->
+  <circle cx="14" cy="9.5" r="7" fill="#5DBB7A"/>
+  <!-- scion leaves -->
+  <circle cx="31.5" cy="12" r="5.5" fill="#86E4CB"/>
+  <!-- graft tape wrapped around the union -->
+  <rect x="15" y="22.25" width="9" height="4.5" rx="1.5" fill="#F7B955" transform="rotate(45 19.5 24.5)"/>
 </svg>
