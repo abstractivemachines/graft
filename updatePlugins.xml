@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Custom plugin repository for JetBrains IDEs.
+  Add https://raw.githubusercontent.com/abstractivemachines/graft/main/updatePlugins.xml under
+  Settings | Plugins | (gear) | Manage Plugin Repositories, then search for "Graft" in the Marketplace tab.
+  Bump the version and url here when a new release is published.
+-->
+<plugins>
+  <plugin id="com.abstractivemachines.graft"
+          url="https://github.com/abstractivemachines/graft/releases/download/v0.1.0/graft-0.1.0.zip"
+          version="0.1.0">
+    <idea-version since-build="262"/>
+    <name>Graft</name>
+    <vendor>Abstractive Machines</vendor>
+    <description><![CDATA[MCP tools that attach a git worktree to the current JetBrains IDE window and detach it again (File | Open | Attach and Remove from Project View, driven from Claude Code).]]></description>
+  </plugin>
+</plugins>
