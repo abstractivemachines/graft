@@ -96,6 +96,15 @@ intellijPlatform {
             }
         }
     }
+
+    // Marketplace upload for versions after the first, manual one: ./gradlew publishPlugin with PUBLISH_TOKEN set.
+    // A pre-release version such as 0.2.0-beta.1 goes to the "beta" channel; a plain version goes to the default channel.
+    publishing {
+        token = providers.environmentVariable("PUBLISH_TOKEN")
+        channels = providers.gradleProperty("pluginVersion").map {
+            listOf(it.substringAfter("-", "").substringBefore(".").ifEmpty { "default" })
+        }
+    }
 }
 
 tasks {

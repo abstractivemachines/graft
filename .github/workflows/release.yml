@@ -1,0 +1,46 @@
+# Publishes a tagged version: builds the zip, uploads it to JetBrains Marketplace, and attaches it to a GitHub release.
+# Tag the commit `vX.Y.Z` (matching pluginVersion in gradle.properties) and push the tag.
+# Requires the PUBLISH_TOKEN repository secret: a permanent token from https://plugins.jetbrains.com/author/me/tokens.
+name: Release
+on:
+  push:
+    tags: [ 'v*' ]
+
+jobs:
+  release:
+    name: Publish plugin
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v7
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: zulu
+          java-version: 21
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Check tag matches pluginVersion
+        run: |
+          version="$(grep '^pluginVersion' gradle.properties | sed 's/.*= *//')"
+          [ "v$version" = "${GITHUB_REF_NAME}" ] || { echo "Tag ${GITHUB_REF_NAME} does not match pluginVersion $version"; exit 1; }
+
+      - name: Build and verify
+        run: ./gradlew buildPlugin verifyPlugin
+
+      - name: Publish to JetBrains Marketplace
+        env:
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+        run: ./gradlew publishPlugin
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="$(./gradlew -q getChangelog --no-header --no-summary --unreleased=false 2>/dev/null || true)"
+          gh release create "${GITHUB_REF_NAME}" ./build/distributions/*.zip --title "${GITHUB_REF_NAME}" --notes "${notes:-See CHANGELOG.md}"

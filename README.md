@@ -107,6 +107,11 @@ The PR for SW-1234 merged. Detach the worktree, delete its .idea, remove the wor
 ./gradlew buildPlugin verifyPlugin -PlocalIdePath=/Applications/WebStorm.app
 ```
 
+**Releasing.** Bump `pluginVersion` in `gradle.properties`, move the `[Unreleased]` notes in `CHANGELOG.md` under
+the new version, update the version and url in `updatePlugins.xml`, commit, then tag `vX.Y.Z` and push the tag.
+The Release workflow builds, verifies, publishes to JetBrains Marketplace (needs the `PUBLISH_TOKEN` secret), and
+attaches the zip to a GitHub release.
+
 The project follows the [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
 layout: plugin metadata lives in `gradle.properties`, the plugin description is this README between the two
 marker comments, and change notes come from `CHANGELOG.md`.
