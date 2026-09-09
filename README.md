@@ -35,12 +35,29 @@ code as MCP tools.
 
 ## Install
 
-1. Download the latest `graft-<version>.zip` from
-   [Releases](https://github.com/abstractivemachines/graft/releases), or build it with
-   `./gradlew buildPlugin` (it lands in `build/distributions/`).
-2. In the IDE: **Settings | Plugins | ⚙ | Install Plugin from Disk...** and pick the zip.
-3. Restart the IDE. The tools appear under **Settings | Tools | MCP Server | Exposed Tools** as *Worktree Attach*.
-4. Restart the MCP client so it picks up the new tool list.
+Pick one. Afterwards restart the IDE, then restart the MCP client so it picks up the new tool list.
+The tools appear under **Settings | Tools | MCP Server | Exposed Tools** as *Graft*.
+
+**Custom plugin repository (recommended, gets updates).** In the IDE open
+**Settings | Plugins | ⚙ | Manage Plugin Repositories**, add
+
+```
+https://raw.githubusercontent.com/abstractivemachines/graft/main/updatePlugins.xml
+```
+
+then search for *Graft* in the **Marketplace** tab and install it. The IDE checks this file for new
+versions the same way it checks the Marketplace.
+
+**One-line install from a terminal (macOS, Linux).** Installs the latest release into every JetBrains IDE
+2026.2 or newer found on the machine:
+
+```
+curl -fsSL https://raw.githubusercontent.com/abstractivemachines/graft/main/install.sh | bash
+```
+
+**Install from disk.** Download `graft-<version>.zip` from
+[Releases](https://github.com/abstractivemachines/graft/releases), or build it with `./gradlew buildPlugin`
+(it lands in `build/distributions/`), then **Settings | Plugins | ⚙ | Install Plugin from Disk...**.
 
 ## Tools
 
