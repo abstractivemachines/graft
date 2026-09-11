@@ -17,9 +17,9 @@ Graft lets an MCP client such as Claude Code attach a git worktree to the curren
 
 <h3>The workflow it is built for</h3>
 <p>The main checkout stays open in one window. An agent creates a worktree per ticket, attaches it, works in it, and detaches it when the branch merges:</p>
-<pre>Start SW-1234: create a worktree off origin/main at ~/src/.worktrees/device/SW-1234-rate-limits,
-attach it to the device window, and run yarn install in it.</pre>
-<pre>SW-1234 merged. Detach its worktree and delete the .idea it left, remove the worktree, and delete the branch.</pre>
+<pre>Start issue 42: create a worktree off origin/main at ~/src/.worktrees/myapp/issue-42-login-form,
+attach it to the myapp window, and run yarn install in it.</pre>
+<pre>Issue 42 merged. Detach its worktree and delete the .idea it left, remove the worktree, and delete the branch.</pre>
 <p>Detach before <code>git worktree remove</code>: the IDE drops the module and VCS mapping cleanly, and the directory is empty afterwards. Every tool accepts the MCP Server's <code>projectPath</code> argument to pick the window when several projects are open.</p>
 
 <h3>Requirements</h3>
@@ -138,11 +138,11 @@ open. Paths may start with `~`.
 Example prompts once the tools are connected:
 
 ```
-Create a worktree for SW-1234 off origin/main at ~/src/.worktrees/device/SW-1234-slug and attach it.
+Create a worktree for issue 42 off origin/main at ~/src/.worktrees/myapp/issue-42-login-form and attach it.
 ```
 
 ```
-The PR for SW-1234 merged. Detach the worktree, delete its .idea, remove the worktree and the branch.
+The PR for issue 42 merged. Detach the worktree, delete its .idea, remove the worktree and the branch.
 ```
 
 ## Using Graft effectively
@@ -162,7 +162,7 @@ agent drives the whole cycle; the IDE follows.
 Confirm the tools are visible by asking the client something that needs them:
 
 ```
-Which worktrees are attached to the device window?
+Which worktrees are attached to the myapp window?
 ```
 
 ### The ticket cycle
@@ -170,14 +170,14 @@ Which worktrees are attached to the device window?
 Start of a ticket. The agent creates the worktree with git, then attaches it:
 
 ```
-Start SW-1234: create a worktree off origin/main at ~/src/.worktrees/device/SW-1234-rate-limits
-with branch SW-1234-rate-limits, attach it to the device window, and run yarn install in it.
+Start issue 42: create a worktree off origin/main at ~/src/.worktrees/myapp/issue-42-login-form
+with branch issue-42-login-form, attach it to the myapp window, and run yarn install in it.
 ```
 
 Behind that request the agent runs `git worktree add`, then calls
 
 ```json
-attach_worktree { "path": "~/src/.worktrees/device/SW-1234-rate-limits" }
+attach_worktree { "path": "~/src/.worktrees/myapp/issue-42-login-form" }
 ```
 
 and gets back the module name and the new module list:
@@ -185,29 +185,29 @@ and gets back the module name and the new module list:
 ```json
 {
   "status": "attached",
-  "moduleName": "SW-1234-rate-limits",
-  "path": "/Users/you/src/.worktrees/device/SW-1234-rate-limits",
+  "moduleName": "issue-42-login-form",
+  "path": "/Users/you/src/.worktrees/myapp/issue-42-login-form",
   "modules": [
-    { "name": "device", "path": "/Users/you/src/device", "primary": true, "linkedWorktree": false },
-    { "name": "SW-1234-rate-limits", "path": "/Users/you/src/.worktrees/device/SW-1234-rate-limits",
-      "primary": false, "linkedWorktree": true, "branch": "SW-1234-rate-limits", "mainRepository": "/Users/you/src/device" }
+    { "name": "myapp", "path": "/Users/you/src/myapp", "primary": true, "linkedWorktree": false },
+    { "name": "issue-42-login-form", "path": "/Users/you/src/.worktrees/myapp/issue-42-login-form",
+      "primary": false, "linkedWorktree": true, "branch": "issue-42-login-form", "mainRepository": "/Users/you/src/myapp" }
   ]
 }
 ```
 
-The worktree now appears in the Project view beside `device`, shares the window's run configurations and terminal,
+The worktree now appears in the Project view beside `myapp`, shares the window's run configurations and terminal,
 and is indexed and searchable together with the main checkout.
 
 End of a ticket. Once the pull request has merged:
 
 ```
-SW-1234 merged. Detach its worktree and delete the .idea it left, remove the worktree, and delete the branch.
+Issue 42 merged. Detach its worktree and delete the .idea it left, remove the worktree, and delete the branch.
 ```
 
 The agent calls
 
 ```json
-detach_worktree { "path": "SW-1234-rate-limits", "deleteIdeaDirectory": true }
+detach_worktree { "path": "issue-42-login-form", "deleteIdeaDirectory": true }
 ```
 
 and then runs `git worktree remove` and `git branch -d`. The order matters: detaching first lets the IDE drop the
@@ -220,7 +220,7 @@ lying in an otherwise deleted folder.
 `list_attached_worktrees` is the audit tool. Ask for it whenever the Project view looks off:
 
 ```
-List what is attached to the measurement window and flag anything whose directory no longer exists.
+List what is attached to the api window and flag anything whose directory no longer exists.
 ```
 
 A module whose `path` is gone on disk, or whose `linkedWorktree` is false when it should be a worktree, is a leftover
@@ -233,7 +233,7 @@ Every Graft tool accepts the MCP Server's `projectPath` argument. With one proje
 the server returns an error listing the open projects, and the agent passes the right one:
 
 ```json
-attach_worktree { "projectPath": "/Users/you/src/measurement", "path": "~/src/.worktrees/measurement/SW-1234-consumer" }
+attach_worktree { "projectPath": "/Users/you/src/api", "path": "~/src/.worktrees/api/issue-42-login-endpoint" }
 ```
 
 Attach into the window that owns the repository the worktree belongs to. The `mainRepository` field in the module

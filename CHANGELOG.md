@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-09-11
+
+### Changed
+
+- Examples in the listing and README use a generic project and issue numbering.
+
 ## [0.1.1] - 2026-09-11
 
 ### Changed

@@ -45,15 +45,15 @@ class WorktreePathsTest {
     @Test
     fun `linkedWorktree reads gitdir pointer and branch`() {
         val main = home.resolve("repo").createDirectories()
-        val gitDir = main.resolve(".git/worktrees/SW-1-slug").createDirectories()
-        gitDir.resolve("HEAD").writeText("ref: refs/heads/SW-1-slug\n")
-        val worktree = home.resolve(".worktrees/repo/SW-1-slug").createDirectories()
+        val gitDir = main.resolve(".git/worktrees/issue-1-slug").createDirectories()
+        gitDir.resolve("HEAD").writeText("ref: refs/heads/issue-1-slug\n")
+        val worktree = home.resolve(".worktrees/repo/issue-1-slug").createDirectories()
         worktree.resolve(".git").writeText("gitdir: $gitDir\n")
 
         val info = WorktreePaths.linkedWorktree(worktree)
         assertNotNull(info)
         assertEquals(gitDir, info!!.gitDir)
-        assertEquals("SW-1-slug", info.branch)
+        assertEquals("issue-1-slug", info.branch)
         assertEquals(main, info.mainRepository)
     }
 
@@ -82,24 +82,24 @@ class WorktreePathsTest {
     @Test
     fun `attachBlocker is null when there is no idea folder`() {
         val dir = home.resolve("wt").createDirectories()
-        assertNull(WorktreePaths.attachBlocker(dir, setOf("device")))
+        assertNull(WorktreePaths.attachBlocker(dir, setOf("myapp")))
     }
 
     @Test
     fun `attachBlocker is null when the module file does not collide`() {
-        val dir = home.resolve("SW-2-slug").createDirectories()
-        dir.resolve(".idea").createDirectories().resolve("SW-2-slug.iml").writeText("<module/>")
-        assertNull(WorktreePaths.attachBlocker(dir, setOf("device", "SW-1-slug")))
+        val dir = home.resolve("issue-2-slug").createDirectories()
+        dir.resolve(".idea").createDirectories().resolve("issue-2-slug.iml").writeText("<module/>")
+        assertNull(WorktreePaths.attachBlocker(dir, setOf("myapp", "issue-1-slug")))
     }
 
     @Test
     fun `attachBlocker explains a copied idea folder`() {
-        val dir = home.resolve("SW-2-slug").createDirectories()
-        dir.resolve(".idea").createDirectories().resolve("device.iml").writeText("<module/>")
-        val reason = WorktreePaths.attachBlocker(dir, setOf("device"))
+        val dir = home.resolve("issue-2-slug").createDirectories()
+        dir.resolve(".idea").createDirectories().resolve("myapp.iml").writeText("<module/>")
+        val reason = WorktreePaths.attachBlocker(dir, setOf("myapp"))
         assertNotNull(reason)
         assertTrue(reason!!.contains("Module name already exists"))
-        assertTrue(reason.contains("device"))
+        assertTrue(reason.contains("myapp"))
     }
 
     @Test
