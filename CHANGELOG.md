@@ -4,6 +4,13 @@
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-09-11
+
+### Changed
+
+- Marketplace listing and README now explain how Graft extends the bundled MCP Server through its `mcpToolset` extension point, what attach and detach do at the platform level, and how to run the worktree-per-ticket cycle with an agent.
+- Install instructions lead with the JetBrains Marketplace, where Graft is now published.
+
 ## [0.1.0] - 2026-09-09
 
 ### Added

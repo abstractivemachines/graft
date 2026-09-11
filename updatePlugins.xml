@@ -7,8 +7,8 @@
 -->
 <plugins>
   <plugin id="com.abstractivemachines.graft"
-          url="https://github.com/abstractivemachines/graft/releases/download/v0.1.0/graft-0.1.0.zip"
-          version="0.1.0">
+          url="https://github.com/abstractivemachines/graft/releases/download/v0.1.1/graft-0.1.1.zip"
+          version="0.1.1">
     <idea-version since-build="262"/>
     <name>Graft</name>
     <vendor>Abstractive Machines</vendor>
