@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-06
+
+### Fixed
+
+- Attaching worktrees in WebStorm 2026.3 no longer fails the directory-less attach capability check.
+
 ## [0.1.2] - 2026-09-11
 
 ### Changed

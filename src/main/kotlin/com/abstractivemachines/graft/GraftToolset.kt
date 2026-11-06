@@ -77,10 +77,6 @@ class GraftToolset : McpToolset {
             return AttachResult("already_attached", existing.name, dir.toString(), readAction { snapshot(project).modules })
         }
 
-        if (!ProjectAttachProcessor.canAttachToProject()) {
-            mcpFail("This IDE does not support attaching directories to an open project.")
-        }
-
         val moduleNames = readAction { ModuleManager.getInstance(project).modules.map { it.name }.toSet() }
         WorktreePaths.attachBlocker(dir, moduleNames)?.let { mcpFail(it) }
 
@@ -95,6 +91,7 @@ class GraftToolset : McpToolset {
 
         // Same processor selection as the Open dialog: ModuleAttachProcessor for a directory that already has .idea,
         // ImportNewProjectAttachProcessor for one that does not.
+        // Check with the actual directory: canAttachToProject() passes null, which 2026.3 processors reject.
         val processor = ProjectAttachProcessor.getProcessor(project, dir, null)
             ?: mcpFail("No attach processor accepts $dir. Check that it is a plain directory and see idea.log for details.")
 
